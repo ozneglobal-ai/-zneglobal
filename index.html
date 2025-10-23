@@ -426,9 +426,10 @@ async function loadData(){
     // Offline fallback + auto-retry
     if(warn) warn.style.display='block';
     if(!latest.length && !featured.length){
-      // show lightweight placeholder so sayfa boş kalmasın
-      latest = Array.from({length:8}).map((_,i)=>({ title:`Örnek Ürün ${i+1}`, price: 500 + i*25 }));
-      featured = latest.slice(0,4);
+      // Offline durumda sahte veriler artık gösterilmeyecek — boş liste gösterilsin.
+      latest = [];
+      featured = [];
+      grid.innerHTML = '';
       renderAll();
     }
     // periyodik yeniden dene
